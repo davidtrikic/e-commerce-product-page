@@ -1,5 +1,15 @@
+/* General styling */
+:root {
+    --clr-primary-orange: hsl(26, 100%, 55%);
+    --clr-secondary-orange: hsl(25, 100%, 94%);
+    --clr-dark-blue: hsl(218, 12%, 13%);
+    --clr-dark-gray-blue: hsl(219, 9%, 45%);
+    --clr-light-gray-blue: hsl(230, 60%, 98%); 
+    --clr-black-transparent: hsl(0, 0%, 0%, 75%);
+}
 body {
     font-family: 'Kumbh Sans', sans-serif;
+    font-size: 16px;
 }
 a {
     text-decoration: none;
@@ -7,4 +17,95 @@ a {
 }
 ul {
     list-style: none;
+    display: flex;
+}
+button {
+    border: none;
+    padding: 0;
+    background-color: transparent;
+    cursor: pointer;
+}
+img {
+    display: block;
+    max-width: 100%;
+}
+.container {
+
+}
+/* Components */
+/* 
+.button {
+
+} */
+.arrow-left {
+    /* display: none; */
+}
+
+/* Header */
+
+header .container {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 1.5rem;
+    /* padding: 2rem 0; */
+    /* border-bottom: 1px solid var(--clr-dark-gray-blue); */
+}
+.header-left,
+.header-right {
+    display: flex;
+    flex-shrink: 0;
+    align-items: center;
+    gap: 1rem;
+}
+.header-right {
+    gap: 1.5rem;
+}
+.desktop-nav ul {
+    column-gap: 2rem;
+    display: none;
+}
+.logo {
+    position: relative;
+    bottom: 1px;
+}
+.profile-image {
+    height: 1.5rem;
+    width: 1.5rem;
+    /* height: 3.125rem; */
+    /* width: 3.125rem; */
+}
+ 
+/* Lightbox */
+
+.lightbox-main {
+    max-height: 300px;
+    position: relative;
+}
+
+.lightbox-thumbs {
+    /* display: none; */
+}
+.product-image-main {
+    height: 300px;
+    width: 100%;
+    object-fit: cover;
+}
+.arrow-left img,
+.arrow-right img {
+    padding-inline: 3px;
+}
+.arrow-left,
+.arrow-right {
+    background-color: #FFF;
+    padding: .7rem;
+    border-radius: 100%;
+    position: absolute;
+    top: calc(50% - 20px);
+}
+.arrow-left {
+    left: 1rem;
+}
+.arrow-right {
+    right: 1rem;
 }
