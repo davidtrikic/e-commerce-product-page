@@ -35,10 +35,10 @@ img {
 
 .container {
     padding: 1.5rem;
+    margin: auto;
 }
 
 /* Components */
-
 
 .button {
     display: flex;
@@ -51,15 +51,18 @@ img {
     background-color: var(--clr-primary-orange);
 }
 
-
 /* Header */
 
+header {
+    max-width: calc(1110px + 2rem);
+    /* max-width: 1110px; */
+    margin: auto;
+}
 header .container {
     display: flex;
     align-items: center;
     justify-content: space-between;
-    /* padding: 2rem 0; */
-    /* border-bottom: 1px solid var(--clr-dark-gray-blue); */
+    border-bottom: 1px solid var(--clr-gray-blue);
 }
 .header-left,
 .header-right {
@@ -82,22 +85,28 @@ header .container {
 .profile-image {
     height: 1.5rem;
     width: 1.5rem;
-    /* height: 3.125rem; */
-    /* width: 3.125rem; */
 }
  
 /* Lightbox */
 
+.lightbox {
+    max-width: 40em;
+    margin: auto;
+}
 .lightbox-main {
     height: 80vw;
     max-height: 640px;
-    max-width: 40em;
-    margin: auto;
     position: relative;
 }
 
 .lightbox-thumbs {
     display: none;
+    justify-content: space-between;
+    gap: 2rem;
+    margin-top: 2rem;
+}
+.lightbox-thumbs img {
+    width: 90px;
 }
 .product-image-main {
     height: 80vw;
@@ -194,8 +203,58 @@ header .container {
     font-size: 1rem;
     font-weight: 700;
     border-radius: 12px;
-    box-shadow: 0px 11px 31px -10px rgba(255,125,26,0.84);
+    box-shadow: 0px 5px 30px -10px rgba(255,125,26,0.84);
 }
-.add-to-cart-btn path {
-    fill: #FFF;
-}
+
+/* Media queries */
+
+@media all and (min-width: 960px) {
+    header {
+        padding: 0 1rem;
+    }
+    h1 {
+        font-size: 2.5rem;
+    }
+    .toggle-nav {
+        display: none;
+    }
+    .desktop-nav ul {
+        display: flex;
+    }
+    .profile-image {
+        height: 3.125rem;
+        width: 3.125rem;
+    }
+    .container {
+        padding: 2rem 0;
+    }
+    .container-lg {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 7rem;
+        padding: 3rem;
+        max-width: 1110px;
+        margin: auto;
+    }
+    .lightbox {
+        max-width: 28rem;
+    }
+    .lightbox-main {
+        max-height: 28rem;
+    }
+    .lightbox-main img {
+        max-height: 28rem;
+    }
+    .lightbox-thumbs {
+        display: flex;
+    }
+    .price-wrapper {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 1rem;
+    }
+    .cart-wrapper {
+        grid-template-columns: minmax(160px, 1fr) 2fr;
+        margin-bottom: 0;
+    }
+} 
