@@ -10,24 +10,29 @@
     --font-family-main: 'Kumbh Sans', sans-serif;
     --font-size-main: 16px;
 }
+
 body {
     font-family: var(--font-family-main);
     font-size: var(--font-size-main);
 }
+
 a {
     text-decoration: none;
     color: inherit;
 }
+
 ul {
     list-style: none;
     display: flex;
 }
+
 button {
     border: none;
     padding: 0;
     background-color: transparent;
     cursor: pointer;
 }
+
 img {
     display: block;
     max-width: 100%;
@@ -49,6 +54,11 @@ img {
     width: 100%;
     color: #FFF;
     background-color: var(--clr-primary-orange);
+    transition: all .2s;
+}
+.button:hover,
+.button:focus-visible {
+    opacity: .7;
 }
 
 /* Header */
@@ -58,12 +68,14 @@ header {
     /* max-width: 1110px; */
     margin: auto;
 }
+
 header .container {
     display: flex;
     align-items: center;
     justify-content: space-between;
     border-bottom: 1px solid var(--clr-gray-blue);
 }
+
 .header-left,
 .header-right {
     display: flex;
@@ -71,53 +83,77 @@ header .container {
     align-items: center;
     gap: 1rem;
 }
+
 .header-right {
     gap: 1.5rem;
 }
-.desktop-nav ul {
-    column-gap: 2rem;
-    display: none;
-}
+
 .logo {
     position: relative;
     bottom: 1px;
 }
+
+.desktop-nav ul {
+    margin: 0;
+    padding: 0;
+    padding-left: 2.5rem;
+    column-gap: 2rem;
+    display: none;
+}
+
+.desktop-nav a {
+    display: block;
+    padding: 3rem 0;
+    max-height: 114px;
+    transition: all .1s;
+}
+
+.desktop-nav a:hover  {
+    border-bottom: 3px solid var(--clr-primary-orange);
+}
+
+.cart-button:hover path {
+    fill: #000;
+}
+
 .profile-image {
     height: 1.5rem;
     width: 1.5rem;
+    border: 2px solid #FFF;
+    border-radius: 100%;
+    transition: all .2s;
 }
- 
+
+.profile-image:hover  {
+    border: 2px solid var(--clr-primary-orange);
+}
+
 /* Lightbox */
 
 .lightbox {
     max-width: 40em;
     margin: auto;
 }
+
 .lightbox-main {
     height: 80vw;
     max-height: 640px;
     position: relative;
 }
 
-.lightbox-thumbs {
-    display: none;
-    justify-content: space-between;
-    gap: 2rem;
-    margin-top: 2rem;
-}
-.lightbox-thumbs img {
-    width: 90px;
-}
 .product-image-main {
     height: 80vw;
     max-height: 640px;
     width: 100%;
     object-fit: cover;
+    border-radius: 16px;
 }
+
 .arrow-left img,
 .arrow-right img {
     padding-inline: 3px;
 }
+
 .arrow-left,
 .arrow-right {
     background-color: #FFF;
@@ -126,11 +162,33 @@ header .container {
     position: absolute;
     top: calc(50% - 20px);
 }
+
 .arrow-left {
     left: 1rem;
 }
+
 .arrow-right {
     right: 1rem;
+}
+
+.lightbox-thumbs {
+    display: none;
+    justify-content: space-between;
+    gap: 2rem;
+    margin-top: 2rem;
+}
+
+.lightbox-thumbs img {
+    width: 90px;
+    border-radius: 12px;
+    transition: all .2s;
+}
+.lightbox-thumbs .active {
+    border: 2px solid var(--clr-primary-orange);
+    opacity: .5;
+}
+.lightbox-thumbs a:hover img {
+    opacity: .4;
 }
 
 /* Product info */
@@ -139,12 +197,14 @@ header .container {
     max-width: 40em;
     margin: auto;
 }
+
 .brand-title {
     font-size: .875rem;
     letter-spacing: 2px;
     color: var(--clr-primary-orange);
     text-transform: uppercase;
 }
+
 .product-info p {
     line-height: 1.5;
     color: var(--clr-dark-gray-blue);
@@ -167,6 +227,7 @@ header .container {
     font-weight: 700;
     line-height: 1;
 }
+
 .discount {
     display: block;
     font-size: 1rem;
@@ -176,6 +237,7 @@ header .container {
     background-color: var(--clr-secondary-orange);
     border-radius: 4px;
 }
+
 .old-price {
     font-weight: 700;
     text-decoration: line-through;
@@ -199,6 +261,7 @@ header .container {
     line-height: 1;
     background-color: var(--clr-light-gray-blue);
 }
+
 .add-to-cart-btn {
     font-size: 1rem;
     font-weight: 700;
@@ -226,7 +289,7 @@ header .container {
         width: 3.125rem;
     }
     .container {
-        padding: 2rem 0;
+        padding: 0;
     }
     .container-lg {
         display: grid;
@@ -244,6 +307,10 @@ header .container {
     }
     .lightbox-main img {
         max-height: 28rem;
+    }
+    .arrow-left,
+    .arrow-right {
+        display: none;
     }
     .lightbox-thumbs {
         display: flex;
