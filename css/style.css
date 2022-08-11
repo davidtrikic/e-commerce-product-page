@@ -128,6 +128,39 @@ header .container {
     border: 2px solid var(--clr-primary-orange);
 }
 
+/* Mobile nav  */
+
+.mobile-nav ul {
+    display: block;
+    background-color: #FFF;
+    position: absolute;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    z-index: 99;
+    padding: 0;
+    padding-top: 1.5rem;
+    padding-right: 8rem;
+    box-shadow: 0 10px 500px 500px var(--clr-black-transparent);
+}
+
+.mobile-nav a {
+    padding: 1rem 1.5rem;
+    font-weight: 700;
+}
+.mobile-nav a:hover,
+.mobile-nav a:active,
+.mobile-nav a:focus-visible {
+    border: none;
+    color: var(--clr-dark-gray-blue);
+}
+.nav-close-btn {
+    margin-left: 1.5rem;
+    margin-bottom: 2rem;
+    font-size: 1.75rem;
+    color: var(--clr-dark-gray-blue);
+}
+
 /* Lightbox */
 
 .lightbox {
@@ -146,7 +179,6 @@ header .container {
     max-height: 640px;
     width: 100%;
     object-fit: cover;
-    border-radius: 16px;
 }
 
 .arrow-left img,
@@ -278,12 +310,13 @@ header .container {
     h1 {
         font-size: 2.5rem;
     }
-    .toggle-nav {
+    .nav-open-btn {
         display: none;
     }
     .desktop-nav ul {
         display: flex;
     }
+
     .profile-image {
         height: 3.125rem;
         width: 3.125rem;
@@ -305,8 +338,9 @@ header .container {
     .lightbox-main {
         max-height: 28rem;
     }
-    .lightbox-main img {
+    .product-image-main {
         max-height: 28rem;
+        border-radius: 16px;
     }
     .arrow-left,
     .arrow-right {
