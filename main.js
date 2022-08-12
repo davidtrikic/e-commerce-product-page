@@ -1,12 +1,14 @@
 const btnToggleNav = document.querySelector('.nav-open-btn');
 const btnCloseNav = document.querySelector('.nav-close-btn');
 const navMenu = document.querySelector('.desktop-nav');
+const btnCart = document.querySelector('.cart-button');
+const profileLink = document.querySelector('.profile-link');
+const cartDiv = document.querySelector('.cart');
 const btnAddToCart = document.querySelector('.add-to-cart-btn');
 const cartContent = document.querySelector('.cart-content');
 const btnCartDelete = document.querySelector('.cart-content button');
-
-
-
+const quantitySelector = document.querySelector('.quantity-selector');
+const quantityBadge = document.querySelector('.cart-quantity-badge');
 
 const showHideNav = () => {
     if(navMenu.classList.contains('mobile-nav')) {
@@ -37,16 +39,20 @@ const addToCart = () => {
     const price = document.createElement('span');
     price.textContent = document.querySelector('.price > span').textContent;
     
-    const quantity = document.createElement('span');
-    quantity.textContent = " x" + document.querySelector('.quantity-number').textContent;
+    const quantitySpan = document.createElement('span');
+    const quantity = document.querySelector('.quantity-number').textContent;
+    quantitySpan.textContent = "x" + quantity;
 
-    const total = document.createElement('span');
-    total.classList.add('cart-total');
-    total.textContent = "  10";
+    const totalSpan = document.createElement('span');
+    totalSpan.classList.add('cart-total');
+
+    const total = price.textContent.slice(1, 4) * quantity;
+    totalSpan.textContent = "$" + total + ".00"
+    
 
     divPrice.appendChild(price);
-    divPrice.appendChild(quantity);
-    divPrice.appendChild(total);
+    divPrice.appendChild(quantitySpan);
+    divPrice.appendChild(totalSpan);
     divArticle.appendChild(divPrice);
 
     const divButton = document.createElement('div');
@@ -63,45 +69,55 @@ const addToCart = () => {
 
     cartContent.appendChild(divArticle);
     cartContent.appendChild(divButton);
+
+    quantityBadge.textContent = quantity;
+    quantityBadge.style.display = "block";
 }
 
-const clearCart = (removeButton) => {
-    while(cartContent.firstChild) {
-        cartContent.removeChild(cartContent.firstChild);
-    }
+const clearCart = (emptyAll) => {
     const btnCheckout = document.querySelector('.btn-checkout');
-    btnCheckout.style.display = "block";
-
-    if(removeButton) {
+    
+    if(emptyAll && confirm('Empty your cart?')) {
+        while(cartContent.firstChild) {
+            cartContent.removeChild(cartContent.firstChild);
+        } 
         btnCheckout.style.display = "none";
+        quantityBadge.style.display = "none";
         const emptyMessage = document.createElement('p');
         emptyMessage.textContent = "Your cart is empty";
         cartContent.appendChild(emptyMessage);
     }
+   
+    if(!emptyAll) {
+        while(cartContent.firstChild) {
+            cartContent.removeChild(cartContent.firstChild);
+        } 
+        btnCheckout.style.display = "block";
+    }   
 }
 
+
+
+const selectQuantity = (e) => {
+    const quantityNumber = document.querySelector('.quantity-number');
+
+    if(e.target.classList.contains('quantity-plus') && quantityNumber.textContent < 10) quantityNumber.textContent++;
+    if(e.target.classList.contains('quantity-minus') && quantityNumber.textContent > 1) quantityNumber.textContent--;
+
+}
+
+
+
+// const showCart = () => {
+ 
+
+// }
 
 
 
 btnToggleNav.addEventListener('click', showHideNav);
 btnCloseNav.addEventListener('click', showHideNav);
 btnAddToCart.addEventListener('click', addToCart);
-
-// btnCartDelete.addEventListener('click', clearCart);
-
-
-/* <img src="assets/images/image-product-1-thumbnail.jpg" alt="">
-
-<div divArticle>
-    <span class="cart-article-title">Fall Limited Edition Sneakers</span>
-    <div divPrice>
-        <span class="cart-price">125</span>
-        <span class="cart-quantity">x 3</span>
-        <span class="cart-total">375</span>
-    </div>
-</div>
-
-<div divButton>
-    <button><img src="assets/images/icon-delete.svg" alt=""></button>
-</div> 
-*/
+quantitySelector.addEventListener('click', selectQuantity);
+// btnCart.addEventListener('click', showCart);
+// profileLink.addEventListener('click', showCart);
