@@ -11,6 +11,9 @@ const btnCartDelete = document.querySelector('.cart-content button');
 const quantitySelector = document.querySelector('.quantity-selector');
 const quantityBadge = document.querySelector('.cart-quantity-badge');
 const productImageMain = document.querySelector('.product-image-main');
+const arrowLeft = document.querySelector('.arrow-left');
+const arrowRight = document.querySelector('.arrow-right');
+let slideIndex = 1;
 
 
 // Show/hide mobile navigation
@@ -120,6 +123,9 @@ const showCart = () => {
 
 
 const lightboxPopup = () => {
+
+    let slideIndex = 0;
+
     const body = document.querySelector('body');
     const overlay = document.createElement('div');
     const lightbox = document.querySelector('.lightbox');
@@ -132,12 +138,18 @@ const lightboxPopup = () => {
     const btnLeftIcon = document.createElement('img');
     btnLeftIcon.src = "assets/images/icon-previous.svg";
     btnLeft.appendChild(btnLeftIcon);
+    btnLeft.addEventListener('click', function() {
+        advanceSlides(-1, true);
+    })
     // Right arrow
     const btnRight = document.createElement('button');
     btnRight.classList.add('arrow-right-popup');
     const btnRightIcon = document.createElement('img');
     btnRightIcon.src = "assets/images/icon-next.svg";
     btnRight.appendChild(btnRightIcon);
+    btnRight.addEventListener('click', function() {
+        advanceSlides(1, true);
+    })
     // Close btn
     const btnClose = document.createElement('button');
     btnClose.innerHTML = "&times;";
@@ -151,11 +163,28 @@ const lightboxPopup = () => {
     lightboxClone.appendChild(btnRight);
     lightboxClone.appendChild(btnClose)
     overlay.appendChild(lightboxClone);
-
     body.appendChild(overlay);
 }
 
 
+const lightboxSlider = (index, isPopup) => {
+
+    const images = document.querySelectorAll('.lightbox-thumbs img');
+    const overlayMainImg = document.querySelector('.overlay .product-image-main');
+
+    if(index < 1) slideIndex = 4;
+    if(index > 4) slideIndex = 1;
+    if(isPopup) {
+        overlayMainImg.src = images[slideIndex - 1].src.slice(0, -14) + ".jpg";
+    }
+    if(!isPopup) {
+        productImageMain.src = images[slideIndex - 1].src.slice(0, -14) + ".jpg";
+    }
+
+
+}
+
+const advanceSlides = (n, isPopup) => lightboxSlider(slideIndex += n, isPopup);
 
 // Listeners
 btnToggleNav.addEventListener('click', showHideNav);
@@ -165,3 +194,9 @@ quantitySelector.addEventListener('click', selectQuantity);
 btnCart.addEventListener('click', showCart);
 profileLink.addEventListener('click', showCart);
 productImageMain.addEventListener('click', lightboxPopup);
+arrowLeft.addEventListener('click', function() {
+    advanceSlides(-1);
+});
+arrowRight.addEventListener('click', function() {
+    advanceSlides(1);
+});
