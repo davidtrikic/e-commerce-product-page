@@ -13,7 +13,8 @@ const quantityBadge = document.querySelector('.cart-quantity-badge');
 const productImageMain = document.querySelector('.product-image-main');
 const arrowLeft = document.querySelector('.arrow-left');
 const arrowRight = document.querySelector('.arrow-right');
-let slideIndex = 1;
+const thumbImages = document.querySelectorAll('.lightbox-thumbs img');
+
 
 
 // Show/hide mobile navigation
@@ -104,14 +105,6 @@ const clearCart = (emptyAll) => {
     }   
 }
 
-const selectQuantity = (e) => {
-    const quantityNumber = document.querySelector('.quantity-number');
-
-    if(e.target.classList.contains('quantity-plus') && quantityNumber.textContent < 10) quantityNumber.textContent++;
-    if(e.target.classList.contains('quantity-minus') && quantityNumber.textContent > 1) quantityNumber.textContent--;
-}
-
-
 const showCart = () => {
     const style = window.getComputedStyle(cartDiv);
     if(style.getPropertyValue('visibility') === "visible") {
@@ -121,10 +114,14 @@ const showCart = () => {
     if(style.getPropertyValue('visibility') === "hidden") cartDiv.style.visibility = "visible";
 }
 
+const selectQuantity = (e) => {
+    const quantityNumber = document.querySelector('.quantity-number');
+
+    if(e.target.classList.contains('quantity-plus') && quantityNumber.textContent < 10) quantityNumber.textContent++;
+    if(e.target.classList.contains('quantity-minus') && quantityNumber.textContent > 1) quantityNumber.textContent--;
+}
 
 const lightboxPopup = () => {
-
-    let slideIndex = 0;
 
     const body = document.querySelector('body');
     const overlay = document.createElement('div');
@@ -139,7 +136,7 @@ const lightboxPopup = () => {
     btnLeftIcon.src = "assets/images/icon-previous.svg";
     btnLeft.appendChild(btnLeftIcon);
     btnLeft.addEventListener('click', function() {
-        advanceSlides(-1, true);
+        lightboxArrowSlider(slideIndex -= 1, true);
     })
     // Right arrow
     const btnRight = document.createElement('button');
@@ -148,7 +145,7 @@ const lightboxPopup = () => {
     btnRightIcon.src = "assets/images/icon-next.svg";
     btnRight.appendChild(btnRightIcon);
     btnRight.addEventListener('click', function() {
-        advanceSlides(1, true);
+        lightboxArrowSlider(slideIndex += 1, true);
     })
     // Close btn
     const btnClose = document.createElement('button');
@@ -158,6 +155,12 @@ const lightboxPopup = () => {
     btnClose.addEventListener('click', function() {
         overlay.remove();
     });
+    // Add listener for thumb image slider
+    lightboxClone.querySelectorAll('.lightbox-thumbs img').forEach(image => {
+        image.addEventListener('click', function(e) {
+            lightboxThumbSlider(e, true);
+        })
+    });
 
     lightboxClone.appendChild(btnLeft);
     lightboxClone.appendChild(btnRight);
@@ -166,25 +169,53 @@ const lightboxPopup = () => {
     body.appendChild(overlay);
 }
 
+let slideIndex = 1;
 
-const lightboxSlider = (index, isPopup) => {
-
-    const images = document.querySelectorAll('.lightbox-thumbs img');
+// Slide images by arrow
+const lightboxArrowSlider = (index, isPopup) => {
+    // Get the main and thumbnail images from popup slider
     const overlayMainImg = document.querySelector('.overlay .product-image-main');
-
+    const thumbImagesOverlay = document.querySelectorAll('.overlay .lightbox-thumbs img');
+    // Loop over images
     if(index < 1) slideIndex = 4;
     if(index > 4) slideIndex = 1;
+
+    // If control comes from popup slider
     if(isPopup) {
-        overlayMainImg.src = images[slideIndex - 1].src.slice(0, -14) + ".jpg";
+        // Get the source from thumb img, using current index from function call; trim img name
+        overlayMainImg.src = thumbImages[slideIndex - 1].src.slice(0, -14) + ".jpg"; 
+        // Remove active class from popup  slider only
+        document.querySelector('.overlay').querySelector('.active').classList.remove('active');
+        // Add active class on current image
+        thumbImagesOverlay[slideIndex - 1].classList.add('active');
     }
+    // If control comes from default page slider
     if(!isPopup) {
-        productImageMain.src = images[slideIndex - 1].src.slice(0, -14) + ".jpg";
+        productImageMain.src = thumbImages[slideIndex - 1].src.slice(0, -14) + ".jpg";
     }
-
-
 }
 
-const advanceSlides = (n, isPopup) => lightboxSlider(slideIndex += n, isPopup);
+
+// Slide images by thumbnails (desktop only)
+const lightboxThumbSlider = (e, isPopup) => {
+    // Get the main image from popup slider
+    const overlayMainImg = document.querySelector('.overlay .product-image-main');
+
+    // If popup slider
+    if(isPopup)  {
+        overlayMainImg.src = e.target.src.slice(0, -14) + ".jpg";
+        document.querySelector('.overlay').querySelector('.active').classList.remove('active');
+        e.target.classList.add('active');
+    }
+    // If default page slider
+    if(!isPopup) {
+        productImageMain.src = e.target.src.slice(0, -14) + ".jpg";
+        document.querySelector('.active').classList.remove('active');
+        e.target.classList.add('active');
+    }
+}
+
+
 
 // Listeners
 btnToggleNav.addEventListener('click', showHideNav);
@@ -195,8 +226,13 @@ btnCart.addEventListener('click', showCart);
 profileLink.addEventListener('click', showCart);
 productImageMain.addEventListener('click', lightboxPopup);
 arrowLeft.addEventListener('click', function() {
-    advanceSlides(-1);
+    lightboxArrowSlider(slideIndex -= 1);
 });
 arrowRight.addEventListener('click', function() {
-    advanceSlides(1);
+    lightboxArrowSlider(slideIndex += 1);
+});
+thumbImages.forEach(image => {
+    image.addEventListener('click', function(e) {
+        lightboxThumbSlider(e);
+    });
 });
