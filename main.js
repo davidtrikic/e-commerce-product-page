@@ -10,6 +10,7 @@ const cartContent = document.querySelector('.cart-content');
 const btnCartDelete = document.querySelector('.cart-content button');
 const quantitySelector = document.querySelector('.quantity-selector');
 const quantityBadge = document.querySelector('.cart-quantity-badge');
+const productImageMain = document.querySelector('.product-image-main');
 
 
 // Show/hide mobile navigation
@@ -118,6 +119,44 @@ const showCart = () => {
 }
 
 
+const lightboxPopup = () => {
+    const body = document.querySelector('body');
+    const overlay = document.createElement('div');
+    const lightbox = document.querySelector('.lightbox');
+    const lightboxClone = lightbox.cloneNode(true)
+    overlay.classList.add('overlay');
+
+    // Left arrow
+    const btnLeft = document.createElement('button');
+    btnLeft.classList.add('arrow-left-popup');
+    const btnLeftIcon = document.createElement('img');
+    btnLeftIcon.src = "assets/images/icon-previous.svg";
+    btnLeft.appendChild(btnLeftIcon);
+    // Right arrow
+    const btnRight = document.createElement('button');
+    btnRight.classList.add('arrow-right-popup');
+    const btnRightIcon = document.createElement('img');
+    btnRightIcon.src = "assets/images/icon-next.svg";
+    btnRight.appendChild(btnRightIcon);
+    // Close btn
+    const btnClose = document.createElement('button');
+    btnClose.innerHTML = "&times;";
+    btnClose.classList.add('lightbox-close-btn');
+
+    btnClose.addEventListener('click', function() {
+        overlay.remove();
+    });
+
+    lightboxClone.appendChild(btnLeft);
+    lightboxClone.appendChild(btnRight);
+    lightboxClone.appendChild(btnClose)
+    overlay.appendChild(lightboxClone);
+
+    body.appendChild(overlay);
+}
+
+
+
 // Listeners
 btnToggleNav.addEventListener('click', showHideNav);
 btnCloseNav.addEventListener('click', showHideNav);
@@ -125,3 +164,4 @@ btnAddToCart.addEventListener('click', addToCart);
 quantitySelector.addEventListener('click', selectQuantity);
 btnCart.addEventListener('click', showCart);
 profileLink.addEventListener('click', showCart);
+productImageMain.addEventListener('click', lightboxPopup);

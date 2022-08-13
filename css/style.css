@@ -194,9 +194,10 @@ header .container {
     top: 100px ;
     right: 8px;
     min-width: 360px;
-    z-index: 99;
+    z-index: 1;
     border-radius: 8px;
     box-shadow: 0 15px 30px 5px rgba(144, 144, 144, 0.379);
+    visibility: hidden;
 }
 
 .cart h3 {
@@ -244,6 +245,7 @@ header .container {
 .lightbox {
     max-width: 40em;
     margin: auto;
+    position: relative;
 }
 
 .lightbox-main {
@@ -260,12 +262,16 @@ header .container {
 }
 
 .arrow-left img,
-.arrow-right img {
+.arrow-right img,
+.arrow-left-popup img,
+.arrow-right-popup img {
     padding-inline: 3px;
 }
 
 .arrow-left,
-.arrow-right {
+.arrow-left-popup,
+.arrow-right,
+.arrow-right-popup {
     background-color: #FFF;
     padding: .7rem;
     border-radius: 100%;
@@ -299,6 +305,37 @@ header .container {
 }
 .lightbox-thumbs a:hover img {
     opacity: .4;
+}
+
+/* Lightbox popup */
+
+.overlay {
+    position: absolute;
+    inset: 0;
+    z-index: 2;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: var(--clr-black-transparent);
+    display: none;
+}
+
+.arrow-left-popup {
+    left: -20px;
+    top: calc(50% - 80px);
+}
+
+.arrow-right-popup {
+    right: -20px;
+    top: calc(50% - 80px);
+}
+
+.lightbox-close-btn {
+    position: absolute;
+    top: -3rem;
+    right: 0;
+    font-size: 2rem;
+    color: #FFF;
 }
 
 /* Product info */
@@ -421,6 +458,9 @@ header .container {
         max-height: 28rem;
         border-radius: 16px;
     }
+    .product-image-main:hover {
+        /* cursor: pointer; */
+    }
     .arrow-left,
     .arrow-right {
         display: none;
@@ -436,5 +476,8 @@ header .container {
     .cart-wrapper {
         grid-template-columns: minmax(160px, 1fr) 2fr;
         margin-bottom: 0;
+    }
+    .overlay {
+        display: flex;
     }
 } 
