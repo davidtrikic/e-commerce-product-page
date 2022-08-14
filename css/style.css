@@ -89,6 +89,7 @@ header .container {
 
 .header-right {
     gap: 1.5rem;
+    position: relative;
 }
 
 .logo {
@@ -172,12 +173,14 @@ header .container {
     font-weight: 700;
     color: #000;
 }
+
 .mobile-nav a:hover,
 .mobile-nav a:active,
 .mobile-nav a:focus-visible {
     border: none;
     color: var(--clr-dark-gray-blue);
 }
+
 .nav-close-btn {
     margin-left: 1.5rem;
     margin-bottom: 2rem;
@@ -193,46 +196,52 @@ header .container {
     background-color: #FFF;
     position: absolute;
     top: 100px ;
-    right: 8px;
+    right: -8px;
     min-width: 360px;
     z-index: 1;
     border-radius: 8px;
     box-shadow: 0 15px 30px 5px rgba(144, 144, 144, 0.379);
-    visibility: hidden;
 }
 
 .cart h3 {
     padding: 1.5rem;
     border-bottom: 1px solid var(--clr-gray-blue);
 }
+
 .cart-content {
     display: flex;
     justify-content: space-between;
     align-items: center;
     padding: 1.5rem;
 }
+
 .cart-content > img {
     max-width: 52px;
     border-radius: 4px;
 }
+
 .cart-article-title {
     display: block;
     margin-bottom: .5rem;
     color: var(--clr-dark-gray-blue);
 }
+
 .cart-article-title + div > * {
     font-size: 1.125rem;
     margin-right: .35rem;
     color: var(--clr-dark-gray-blue);
 }
+
 .cart-content .cart-total {
     font-weight: 700;
     color: #000;
 }
+
 .cart-content p {
     margin: 3rem auto;
     color: var(--clr-dark-gray-blue);
 }
+
 .btn-checkout {
     width: calc(100% - 3rem);
     margin-left: 1.5rem;
@@ -241,7 +250,7 @@ header .container {
     display: none;
 }
 
-/* Lightbox */
+/* Lightbox / image slider*/
 
 .lightbox {
     max-width: 40em;
@@ -300,25 +309,28 @@ header .container {
     border-radius: 12px;
     transition: all .2s;
 }
+
 .lightbox-thumbs a {
     background-color: #FFF;
     border-radius: 12px;
 }
+
 .lightbox-thumbs .active {
     border: 2px solid var(--clr-primary-orange);
     opacity: .5;
-
 }
+
 .lightbox-thumbs a:hover img {
     opacity: .4;
 }
 
-/* Lightbox popup */
+/* Lightbox / image slider popup */
 
 .overlay {
     position: absolute;
     inset: 0;
     z-index: 2;
+    min-height: 110vh;
     display: flex;
     justify-content: center;
     align-items: center;

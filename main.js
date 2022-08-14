@@ -16,7 +16,6 @@ const arrowRight = document.querySelector('.arrow-right');
 const thumbImages = document.querySelectorAll('.lightbox-thumbs img');
 
 
-
 // Show/hide mobile navigation
 const showHideNav = () => {
     if(navMenu.classList.contains('mobile-nav')) {
@@ -57,7 +56,6 @@ const addToCart = () => {
     const total = price.textContent.slice(1, 4) * quantity; // Calculate cart total
     totalSpan.textContent = "$" + total + ".00"
     
-
     divPrice.appendChild(price);
     divPrice.appendChild(quantitySpan);
     divPrice.appendChild(totalSpan);
@@ -107,11 +105,11 @@ const clearCart = (emptyAll) => {
 
 const showCart = () => {
     const style = window.getComputedStyle(cartDiv);
-    if(style.getPropertyValue('visibility') === "visible") {
-        cartDiv.style.visibility = "hidden";
+    if(style.getPropertyValue('display') === "flex") {
+        cartDiv.style.display = "none";
         return
     }
-    if(style.getPropertyValue('visibility') === "hidden") cartDiv.style.visibility = "visible";
+    if(style.getPropertyValue('display') === "none") cartDiv.style.display = "flex";
 }
 
 const selectQuantity = (e) => {
@@ -214,7 +212,6 @@ const lightboxThumbSlider = (e, isPopup) => {
         e.target.classList.add('active');
     }
 }
-
 
 
 // Listeners
