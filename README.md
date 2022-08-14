@@ -27,8 +27,7 @@ Users should be able to:
 
 ### Links
 
-- Solution URL: [Add solution URL here](https://your-solution-url.com)
-- Live Site URL: [Add live site URL here](https://your-live-site-url.com)
+- Live Site URL: [https://davidtrikic.github.io/e-commerce-product-page/](https://davidtrikic.github.io/e-commerce-product-page/)
 
 
 ## My process
@@ -43,9 +42,9 @@ Users should be able to:
 
 ### Screenshots
 
-![](./screenshots/scrscreenshot_1.png)
-![](./screenshots/scrscreenshot_2.png)
-![](./screenshots/scrscreenshot_3.png)
-![](./screenshots/scrscreenshot_4.png)
+![](./screenshots/screenshot_1.png)
+![](./screenshots/screenshot_2.png)
+![](./screenshots/screenshot_3.png)
+![](./screenshots/screenshot_4.png)
 
 
